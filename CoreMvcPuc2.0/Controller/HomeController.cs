@@ -20,11 +20,11 @@ namespace CoreMvcPuc2Controller
             return View(model);
         }
 
-        public ViewResult Details(int id)
+        public ViewResult Details(int? id)
         {
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel
             {
-                Employee = _employeeRepository.GetEmployee(3),
+                Employee = _employeeRepository.GetEmployee(id??1),
                 PageTitle = "Employee Details"
             };
             return View(homeDetailsViewModel);
