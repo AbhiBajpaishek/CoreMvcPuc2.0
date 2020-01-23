@@ -20,7 +20,7 @@ namespace CoreMvcPuc2Controller
             return View(model);
         }
 
-        public ViewResult Details()
+        public ViewResult Details(int id)
         {
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel
             {
