@@ -29,10 +29,7 @@ namespace CoreMvcPuc2._0
             }
 
             app.UseStaticFiles();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute("default","{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvc();
 
             app.Run(async (context) =>
             {
