@@ -4,26 +4,56 @@
     ViewBag.Title = "Employee List";
 }
 
-<table>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Department</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="container">
+    <div class="row">
         @{
             foreach (var emp in Model)
             {
-                <tr>
-                    <td>@emp.Id</td>
-                    <td>@emp.Name</td>
-                    <td>@emp.Email</td>
-                    <td>@emp.Department</td>
-                </tr>
+                <div class="col-lg-4">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header">
+                              <h5>@emp.Name</h5>
+                        </div>
+                        <img src="~/Images/1.jpg" class="card-img-bottom" alt="...">
+                        <div class="card-footer text-center">
+                            <button type="button" class="btn btn-primary">View</button>
+                            <button type="button" class="btn btn-primary">Edit</button>
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
             }
         }
-    </tbody>
-</table>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+@*<table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var emp in Model)
+                {
+                    <tr>
+                        <td>@emp.Id</td>
+                        <td>@emp.Name</td>
+                        <td>@emp.Email</td>
+                        <td>@emp.Department</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>*@

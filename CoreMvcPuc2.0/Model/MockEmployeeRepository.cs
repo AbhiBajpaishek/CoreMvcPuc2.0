@@ -15,8 +15,7 @@ namespace CoreMvcPuc2.Model
             {
                 new Employee(){Id=1,Name="Abhi",Email="abhi@gmail.com",Department="IT"},
                 new Employee(){Id=2,Name="Abhinav",Email="navv@live.in",Department="Finance"},
-                new Employee(){Id=3,Name="Amit",Email="amit@yahoo.com",Department="HR"},
-                new Employee(){Id=4,Name="Vishesh",Email="vishesh@gmail.com",Department="Admin"}
+                new Employee(){Id=3,Name="Amit",Email="amit@yahoo.com",Department="HR"}
             };
         }
 
