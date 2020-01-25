@@ -5,12 +5,31 @@
     ViewBag.Title = "Employee Details";
 }
 
-
 <h3>@Model.PageTitle</h3>
 
-<div>Name: @Model.Employee.Name</div>
-<div>Email: @Model.Employee.Email</div>
-<div>Department: @Model.Employee.Department</div>
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                <h5>@Model.Employee.Name</h5>
+            </div>
+
+            <div class="card-body text-center">
+                <img src="~/Images/1.jpg" class="card-img-top" alt="...">
+                <h4>Id: @Model.Employee.Id</h4>
+                <h4>Email: @Model.Employee.Email</h4>
+                <h4>Department: @Model.Employee.Department</h4>
+            </div>
+            <div class="card-footer text-center">
+                <button type="button" class="btn btn-primary">View</button>
+                <button type="button" class="btn btn-primary">Edit</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 @section Scripts{
 
