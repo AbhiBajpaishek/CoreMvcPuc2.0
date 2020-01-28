@@ -5,12 +5,14 @@
             <label asp-for="Name">
             </label>
             <input asp-for="Name" />
+            <span class="alert-danger" asp-validation-for=Name></span>
         </div>
 
         <div>
             <label asp-for="Email">
             </label>
             <input asp-for="Email" />
+            <span class="alert-danger" asp-validation-for=Email></span>
         </div>
 
         <div>
@@ -21,6 +23,7 @@
             </select>
         </div>
 
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div>
             <button type="submit">
                 Create

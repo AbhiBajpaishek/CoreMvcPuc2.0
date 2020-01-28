@@ -37,11 +37,15 @@ namespace CoreMvcPuc2Controller
         }
 
         [HttpPost]
-        public RedirectToActionResult Create(Employee employee)
+        public IActionResult Create(Employee employee)
         {
-
-           Employee emp= _employeeRepository.AddEmployee(employee);
-            return RedirectToAction("details",new {id= emp.Id});
+            if (ModelState.IsValid)
+            {
+                Employee emp = _employeeRepository.AddEmployee(employee);
+                return RedirectToAction("details", new { id = emp.Id });
+            }
+            else
+                return View();
         }
     }
 }
