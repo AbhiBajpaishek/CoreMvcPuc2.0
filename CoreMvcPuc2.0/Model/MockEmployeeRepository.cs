@@ -13,9 +13,9 @@ namespace CoreMvcPuc2.Model
         {
             _employeeList = new List<Employee>
             {
-                new Employee(){Id=1,Name="Abhi",Email="abhi@gmail.com",Department="IT"},
-                new Employee(){Id=2,Name="Abhinav",Email="navv@live.in",Department="Finance"},
-                new Employee(){Id=3,Name="Amit",Email="amit@yahoo.com",Department="HR"}
+                new Employee(){Id=1,Name="Abhi",Email="abhi@gmail.com",Department=Dept.HR},
+                new Employee(){Id=2,Name="Abhinav",Email="navv@live.in",Department=Dept.Finance},
+                new Employee(){Id=3,Name="Amit",Email="amit@yahoo.com",Department=Dept.IT}
             };
         }
 
