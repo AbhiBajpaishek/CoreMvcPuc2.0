@@ -18,9 +18,10 @@
         <div>
             <label asp-for="Department">
             </label>
-            <select asp-for="Department" asp-items="Html.GetEnumSelectList<Dept>()" >
-            
+            <select asp-for="Department" asp-items="Html.GetEnumSelectList<Dept>()">
+                <option value="">Select Department</option>
             </select>
+            <span class="alert-danger" asp-validation-for=Department></span>
         </div>
 
         <div asp-validation-summary="All" class="text-danger"></div>

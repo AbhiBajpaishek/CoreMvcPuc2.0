@@ -18,6 +18,7 @@ namespace CoreMvcPuc2.Model
             ErrorMessage ="Email is not valid")]
         [Display(Name ="Office Email")]
         public string Email { get; set; }
-        public Dept Department { get; set; }
+        [Required]
+        public Dept? Department { get; set; }
     }
 }
