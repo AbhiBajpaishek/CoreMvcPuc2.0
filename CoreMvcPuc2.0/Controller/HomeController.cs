@@ -30,9 +30,18 @@ namespace CoreMvcPuc2Controller
             return View(homeDetailsViewModel);
         }
 
+        [HttpGet]
         public ViewResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public RedirectToActionResult Create(Employee employee)
+        {
+
+           Employee emp= _employeeRepository.AddEmployee(employee);
+            return RedirectToAction("details",new {id= emp.Id});
         }
     }
 }
