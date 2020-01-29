@@ -1,4 +1,5 @@
 ﻿@model Employee
+@inject IEmployeeRepository _employeeRepository
 
     <form method="post" asp-controller="home" asp-action="create">
         <div>
@@ -29,6 +30,10 @@
             <button type="submit">
                 Create
             </button>
+        </div>
+
+        <div>
+            Total No of Employees: @_employeeRepository.GetAllEmployees().Count()
         </div>
 
     </form>

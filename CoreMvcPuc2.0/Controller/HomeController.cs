@@ -12,7 +12,10 @@ namespace CoreMvcPuc2Controller
     {
         private IEmployeeRepository _employeeRepository;
 
-        public HomeController(IEmployeeRepository employeeRepository) => _employeeRepository = employeeRepository;
+        public HomeController(IEmployeeRepository employeeRepository)
+        {
+            _employeeRepository = employeeRepository;
+        }
 
         public ViewResult Index()
         {
