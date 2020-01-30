@@ -26,7 +26,7 @@ namespace CoreMvcPuc2._0
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().AddXmlDataContractSerializerFormatters();
-            services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+            services.AddScoped<IEmployeeRepository, SqlEmployeeRepository>();
             services.AddDbContextPool<AppDbContext>(options =>
             options.UseSqlServer(_config.GetConnectionString("EmployeeDbConnection")));
         }
