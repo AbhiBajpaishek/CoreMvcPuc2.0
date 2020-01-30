@@ -20,5 +20,7 @@ namespace CoreMvcPuc2.Model
         public string Email { get; set; }
         [Required]
         public Dept? Department { get; set; }
+        public string PhotoPath { get; set; }
+        public int Someproperty { get; set; } 
     }
 }
