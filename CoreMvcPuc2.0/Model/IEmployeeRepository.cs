@@ -10,5 +10,7 @@ namespace CoreMvcPuc2.Model
         Employee GetEmployee(int Id);
         IEnumerable<Employee> GetAllEmployees();
         Employee AddEmployee(Employee employee);
+        Employee UpdateEmployee(Employee changedEmployee);
+        Employee DeleteEmployee(int id);
     }
 }

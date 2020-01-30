@@ -26,6 +26,14 @@ namespace CoreMvcPuc2.Model
             return employee;
         }
 
+        public Employee DeleteEmployee(int id)
+        {
+            var employee = _employeeList.FirstOrDefault(emp => emp.Id == id);
+            if (employee != null)
+                _employeeList.Remove(employee);
+            return employee;
+        }
+
         public IEnumerable<Employee> GetAllEmployees()
         {
             return _employeeList;
@@ -34,6 +42,18 @@ namespace CoreMvcPuc2.Model
         public Employee GetEmployee(int Id)
         {
             return _employeeList.FirstOrDefault(e => e.Id == Id);
+        }
+
+        public Employee UpdateEmployee(Employee changedEmployee)
+        {
+            var employee = _employeeList.FirstOrDefault(emp => emp.Id == changedEmployee.Id);
+            if (employee != null)
+            {
+                employee.Name = changedEmployee.Name;
+                employee.Email = changedEmployee.Email;
+                employee.Department = changedEmployee.Department;
+            }
+            return employee;
         }
     }
 }
