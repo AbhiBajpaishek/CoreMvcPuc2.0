@@ -15,7 +15,7 @@
                         <div class="card-header">
                             <h5>@emp.Name</h5>
                         </div>
-                        <img src="@imageSource" class="card-img-bottom" asp-append-version="true">
+                        <img src="@imageSource" class="card-img-top customImage" asp-append-version="true">
                         <div class="card-footer text-center">
                             <a asp-controller="home" asp-action="details" asp-route-Id="@emp.Id" class="btn btn-primary">View</a>
                             <a href="" class="btn btn-primary">Edit</a>
@@ -26,7 +26,6 @@
             }
         }
     </div>
-
 
 </div>
 
