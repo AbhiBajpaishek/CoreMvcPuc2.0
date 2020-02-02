@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace CoreMvcPuc2Controller
 {
-    public class HomeController :Controller
+    public class HomeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IHostingEnvironment _hostingEnvironment;
 
-        public HomeController(IEmployeeRepository employeeRepository, IHostingEnvironment hostingEnvironment )
+        public HomeController(IEmployeeRepository employeeRepository, IHostingEnvironment hostingEnvironment)
         {
             _employeeRepository = employeeRepository;
             _hostingEnvironment = hostingEnvironment;
@@ -32,7 +32,7 @@ namespace CoreMvcPuc2Controller
         {
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel
             {
-                Employee = _employeeRepository.GetEmployee(id??1),
+                Employee = _employeeRepository.GetEmployee(id ?? 1),
                 PageTitle = "Employee Details"
             };
             return View(homeDetailsViewModel);
@@ -45,16 +45,48 @@ namespace CoreMvcPuc2Controller
             EmployeeEditViewModel employeeEditViewModel = new EmployeeEditViewModel
             {
                 Id = employee.Id,
-                Name=employee.Name,
-                Email=employee.Email,
-                Department=employee.Department,
-                existingPhotoPath=employee.PhotoPath
+                Name = employee.Name,
+                Email = employee.Email,
+                Department = employee.Department,
+                existingPhotoPath = employee.PhotoPath
             };
             return View(employeeEditViewModel);
         }
 
+        [HttpPost]
+        public IActionResult Edit(EmployeeEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Employee employee = _employeeRepository.GetEmployee(model.Id);
+                employee.Name = model.Name;
+                employee.Email = model.Email;
+                employee.Department = model.Department;
+                string uniqueFileName;
+                if (model.Photo != null)
+                {
+                    if (model.existingPhotoPath != null)
+                    {
+                        string pathToDelete = Path.Combine(_hostingEnvironment.WebRootPath + "Images" + model.existingPhotoPath);
+                        System.IO.File.Delete(pathToDelete);
+                    }
+                    uniqueFileName = ProcessUploadedPhoto(model);
+                    employee.PhotoPath = uniqueFileName;
+                }
+                else
+                {
+                    employee.PhotoPath = model.existingPhotoPath;
+                }
+                
+                _employeeRepository.UpdateEmployee(employee);
+                return RedirectToAction("details", new { id = model.Id });
+            }
+            else
+                return View();
+        }
+
         [HttpGet]
-        public ViewResult Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -67,10 +99,7 @@ namespace CoreMvcPuc2Controller
                 string uniqueFileName = null;
                 if(model.Photo!=null)
                 {
-                    string folderName = Path.Combine(_hostingEnvironment.WebRootPath,"images");
-                    uniqueFileName = Guid.NewGuid() + "_" + model.Photo.FileName;
-                    string completePath = Path.Combine(folderName, uniqueFileName);
-                    model.Photo.CopyTo(new FileStream(completePath,FileMode.Create));
+                    uniqueFileName = ProcessUploadedPhoto(model);
                 }
                 Employee emp = _employeeRepository.AddEmployee(
                     new Employee
@@ -84,6 +113,19 @@ namespace CoreMvcPuc2Controller
             }
             else
                 return View();
+        }
+
+        private string ProcessUploadedPhoto(EmployeeCreateViewModel model)
+        {
+            string uniqueFileName;
+            string folderName = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+            uniqueFileName = Guid.NewGuid() + "_" + model.Photo.FileName;
+            string completePath = Path.Combine(folderName, uniqueFileName);
+            using (FileStream fileStream= new FileStream(completePath, FileMode.Create))
+            {
+                model.Photo.CopyTo(fileStream);
+            }
+            return uniqueFileName;
         }
     }
 }
