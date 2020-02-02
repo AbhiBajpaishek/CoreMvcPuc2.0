@@ -1,5 +1,9 @@
 ﻿@model EmployeeCreateViewModel
 
+@{
+     ViewBag.Title = "Create Employee";
+}
+
     <form enctype="multipart/form-data" method="post" asp-controller="home" asp-action="create">
         <div>
             <label asp-for="Name">

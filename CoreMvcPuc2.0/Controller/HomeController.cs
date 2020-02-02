@@ -39,6 +39,21 @@ namespace CoreMvcPuc2Controller
         }
 
         [HttpGet]
+        public ViewResult Edit(int id)
+        {
+            Employee employee = _employeeRepository.GetEmployee(id);
+            EmployeeEditViewModel employeeEditViewModel = new EmployeeEditViewModel
+            {
+                Id = employee.Id,
+                Name=employee.Name,
+                Email=employee.Email,
+                Department=employee.Department,
+                existingPhotoPath=employee.PhotoPath
+            };
+            return View(employeeEditViewModel);
+        }
+
+        [HttpGet]
         public ViewResult Create()
         {
             return View();

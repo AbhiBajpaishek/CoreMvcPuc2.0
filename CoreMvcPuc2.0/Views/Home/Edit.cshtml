@@ -1,0 +1,56 @@
+﻿@model EmployeeEditViewModel
+
+@{
+    ViewBag.Title = "Edit Employee";
+    var imageSource = "~/Images/" + (Model.existingPhotoPath ?? "1.jpg");
+}
+
+<form enctype="multipart/form-data" method="post" asp-controller="home" asp-action="edit">
+    <input hidden asp-for="Id" />
+    <input hidden asp-for="existingPhotoPath" />
+
+    <div>
+        <label asp-for="Name">
+        </label>
+        <input asp-for="Name" />
+        <span class="alert-danger" asp-validation-for=Name></span>
+    </div>
+
+    <div>
+        <label asp-for="Email">
+        </label>
+        <input asp-for="Email" />
+        <span class="alert-danger" asp-validation-for=Email></span>
+    </div>
+
+    <div>
+        <label asp-for="Department">
+        </label>
+        <select asp-for="Department" asp-items="Html.GetEnumSelectList<Dept>()">
+            <option value="">Select Department</option>
+        </select>
+        <span class="alert-danger" asp-validation-for=Department></span>
+    </div>
+
+    <div>
+        <label asp-for="Photo">
+        </label>
+        <div class="custom-file">
+            <input multiple asp-for="Photo" class="custom-file-input" />
+            <label class="custom-file-label">Click to change image</label>
+        </div>
+        <span class="alert-danger" asp-validation-for=Email></span>
+    </div>
+
+    <div>
+        <img asp-append-version="true" src="@imageSource" class="card-img-top customImage" />
+    </div>
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div>
+        <button type="submit" class="btn btn-primary">
+            Update
+        </button>
+        <a asp-controller="home" asp-action="index" class="btn btn-primary">Cancel</a>
+    </div>
+</form>
