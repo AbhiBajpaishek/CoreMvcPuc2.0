@@ -1,7 +1,6 @@
-﻿@model Employee
-@inject IEmployeeRepository _employeeRepository
+﻿@model EmployeeCreateViewModel
 
-    <form method="post" asp-controller="home" asp-action="create">
+    <form enctype="multipart/form-data" method="post" asp-controller="home" asp-action="create">
         <div>
             <label asp-for="Name">
             </label>
@@ -25,15 +24,20 @@
             <span class="alert-danger" asp-validation-for=Department></span>
         </div>
 
+        <div>
+            <label asp-for="Photo">
+            </label>
+            <div class="custom-file">
+                <input asp-for="Photo" class="custom-file-input" />
+                <label class="custom-file-label">Choose file...</label>
+            </div>
+            <span class="alert-danger" asp-validation-for=Email></span>
+        </div>
+
         <div asp-validation-summary="All" class="text-danger"></div>
         <div>
             <button type="submit">
                 Create
             </button>
         </div>
-
-        <div>
-            Total No of Employees: @_employeeRepository.GetAllEmployees().Count()
-        </div>
-
     </form>

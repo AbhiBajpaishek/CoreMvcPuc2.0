@@ -1,25 +1,26 @@
-﻿using System;
+﻿using CoreMvcPuc2.Model;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CoreMvcPuc2.Model
+namespace CoreMvcPuc2.ViewModels
 {
-    public class Employee
+    public class EmployeeCreateViewModel
     {
-        public int Id { get; set; }
         [Required]
-        [MaxLength(50,ErrorMessage ="Name cannot exceed 50 characters")]
+        [MaxLength(50, ErrorMessage = "Name cannot exceed 50 characters")]
         public string Name { get; set; }
         [Required]
         [RegularExpression(@"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
                 @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
-            ErrorMessage ="Email is not valid")]
-        [Display(Name ="Office Email")]
+            ErrorMessage = "Email is not valid")]
+        [Display(Name = "Office Email")]
         public string Email { get; set; }
         [Required]
         public Dept? Department { get; set; }
-        public string PhotoPath { get; set; }
+        public IFormFile Photo { get; set; }
     }
 }

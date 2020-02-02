@@ -1,8 +1,10 @@
 ﻿using CoreMvcPuc2.Model;
 using CoreMvcPuc2.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,11 +12,14 @@ namespace CoreMvcPuc2Controller
 {
     public class HomeController :Controller
     {
-        private IEmployeeRepository _employeeRepository;
+        private readonly IEmployeeRepository _employeeRepository;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
-        public HomeController(IEmployeeRepository employeeRepository)
+        public HomeController(IEmployeeRepository employeeRepository, IHostingEnvironment hostingEnvironment )
         {
             _employeeRepository = employeeRepository;
+            _hostingEnvironment = hostingEnvironment;
+
         }
 
         public ViewResult Index()
@@ -40,11 +45,26 @@ namespace CoreMvcPuc2Controller
         }
 
         [HttpPost]
-        public IActionResult Create(Employee employee)
+        public IActionResult Create(EmployeeCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
-                Employee emp = _employeeRepository.AddEmployee(employee);
+                string uniqueFileName = null;
+                if(model.Photo!=null)
+                {
+                    string folderName = Path.Combine(_hostingEnvironment.WebRootPath,"images");
+                    uniqueFileName = Guid.NewGuid() + "_" + model.Photo.FileName;
+                    string completePath = Path.Combine(folderName, uniqueFileName);
+                    model.Photo.CopyTo(new FileStream(completePath,FileMode.Create));
+                }
+                Employee emp = _employeeRepository.AddEmployee(
+                    new Employee
+                    {
+                        Name = model.Name,
+                        Department = model.Department,
+                        Email = model.Email,
+                        PhotoPath = uniqueFileName
+                    });
                 return RedirectToAction("details", new { id = emp.Id });
             }
             else
